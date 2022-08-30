@@ -1,13 +1,18 @@
 /// <reference types="cypress" />
+
+import { HomePage } from "../support/pages/homePage"
+
+
 describe('Hooks', () => {
-    let datosLogin, datosTareas
+    let datosLogin, productos
+    const homePage = new HomePage();
 
     before("Before", () => {
         cy.fixture("loginData").then(datos => {
             datosLogin = datos;
         })
-        cy.fixture("tareas").then(datos => {
-            datosTareas = datos;
+        cy.fixture("productos").then(datos => {
+            productos = datos;
         })
     })
     beforeEach("Before each", () => {
@@ -21,13 +26,17 @@ describe('Hooks', () => {
 
 
     it('Crear Tareas', () => {
-        cy.get('#task').type(datosTareas.tarea1).type('{enter}')
-        cy.get('#task').type(datosTareas.tarea2).type('{enter}')
-        cy.get('#task').type(datosTareas.tarea3).type('{enter}')
-        cy.get('#task').type(datosTareas.tarea4).type('{enter}')
-        cy.get('#task').type(datosTareas.tarea5).type('{enter}')
+        let tarea1 = 'tarea1'
+        let tarea2 = 'tarea2'
+        let tarea3 = 'tarea3'
+        let tarea4 = 'tarea4'
+        let tarea5 = 'tarea5'
+        cy.get('#task').type(`${tarea1}{enter}`)
+        cy.get('#task').type(`${tarea2}{enter}`)
+        cy.get('#task').type(`${tarea3}{enter}`)
+        cy.get('#task').type(`${tarea4}{enter}`)
+        cy.get('#task').type(`${tarea5}{enter}`)
     });
-
     it('Validar si existen botones', () => {
         cy.get('#all').should('exist');
         cy.get('#completed').should('exist');
@@ -52,6 +61,4 @@ describe('Hooks', () => {
     after("After", () => {
         cy.log("After")
     })
-
-
 })
